@@ -5,10 +5,10 @@ FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
 # Fix locales
-RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
+# RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
 
 # Enable universe
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
+# RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
 RUN apt-get update 
 RUN apt-get -y upgrade  
 RUN apt-get clean 
