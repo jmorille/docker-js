@@ -27,7 +27,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 
 # Config
 RUN rm /etc/apache2/sites-enabled/*
-ADD etc/001-gitserveur.conf /etc/apache2/sites-enabled/001-gitserveur.conf
+ADD etc/001-gitserver.conf /etc/apache2/sites-enabled/001-gitserver.conf
 
 # Expose
 VOLUME ["/var/www/git", "/var/log/apache2"]
