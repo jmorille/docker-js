@@ -9,6 +9,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Enable universe
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
+
+# Update Ubuntu
 RUN apt-get update 
 RUN apt-get -y upgrade  
 RUN apt-get clean 
@@ -18,7 +20,6 @@ RUN apt-get -y install git-core
 
 # Install Apache2 HTTPD
 RUN apt-get -y install apache2 
-RUN apt-get -y clean 
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
