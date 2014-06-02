@@ -10,16 +10,18 @@ sudo docker build -t jmorille/git-server .
 
 # View Image
 sudo docker run -i -t \
-   -p 8585:80 \
-   -v /tmp/git-server/repo:/var/www/git \
-   -v /tmp/git-server/log:/var/log/apache2 \
-   jmorille/git-server /bin/bash
+ -p 8585:80 \
+ -v /tmp/git-server/repo:/var/www/git \
+ -v /tmp/git-server/log:/var/log/apache2 \
+ jmorille/git-server /bin/bash
 
 
 
 # Run Image
 sudo docker run -i -t \
-   -p 8585:80 \
-   -v /tmp/git-server/repo:/var/www/git \
-   -v /tmp/git-server/log:/var/log/apache2 \
-   jmorille/git-server 
+ -p 8585:80 \
+ -v /tmp/git-server/repo:/var/www/git \
+ -v /tmp/git-server/log:/var/log/apache2 \
+ jmorille/git-server
+ 
+
