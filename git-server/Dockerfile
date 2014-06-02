@@ -27,10 +27,10 @@ ENV APACHE_LOG_DIR /var/log/apache2
 
 # Config
 RUN rm /etc/apache2/sites-enabled/*
-ADD etc/001-gitweb.conf /etc/apache2/sites-enabled/001-gitweb.conf
+ADD etc/001-gitserveur.conf /etc/apache2/sites-enabled/001-gitserveur.conf
 
 # Expose
-VOLUME ["/var/www/gitweb", "/var/log/apache2"]
+VOLUME ["/var/www/git", "/var/log/apache2"]
 
 EXPOSE 80 443
 
