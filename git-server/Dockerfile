@@ -19,10 +19,10 @@ ENV DEBIAN_FRONTEND noninteractive
 # Enable universe
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
 
-RUN echo "# some more ls aliases" >> /root/.profile
-RUN echo "alias ll='ls -alF'" >> /root/.profile
-RUN echo "alias la='ls -A'" >> /root/.profile
-RUN echo "alias l='ls -CF'" >> /root/.profile
+# RUN echo "# some more ls aliases" >> /root/.profile
+# RUN echo "alias ll='ls -alF'" >> /root/.profile
+# RUN echo "alias la='ls -A'" >> /root/.profile
+# RUN echo "alias l='ls -CF'" >> /root/.profile
 
 # Update Ubuntu
 # #######################

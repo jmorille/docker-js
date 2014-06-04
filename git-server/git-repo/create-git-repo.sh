@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GIT_REPO_DIR=/war/www/git
+GIT_REPO_DIR=/var/www/git
 
 PROJECT_NAME=$1
 PROJECT_DIR=$GIT_REPO_DIR/$PROJECT_NAME.git
