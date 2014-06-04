@@ -18,12 +18,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Enable universe
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
-
-# RUN echo "# some more ls aliases" >> /root/.profile
-# RUN echo "alias ll='ls -alF'" >> /root/.profile
-# RUN echo "alias la='ls -A'" >> /root/.profile
-# RUN echo "alias l='ls -CF'" >> /root/.profile
-
+ 
 # Update Ubuntu
 # #######################
 RUN apt-get update 
@@ -32,7 +27,12 @@ RUN apt-get clean
 
 # Install Git
 # #######################
-RUN apt-get -y install git-core
+RUN apt-get -y install git
+
+# Install GitWeb
+# #######################
+RUN apt-get -y install gitweb
+# echo -e '$projectroot = "/var/www/git";' > /etc/gitweb.conf 
 
 # Install Apache2 HTTPD
 # #######################
@@ -55,8 +55,9 @@ RUN mkdir -p $APACHE_LOCK_DIR/..
 RUN a2enmod rewrite 
 
 RUN rm /etc/apache2/sites-enabled/*
-ADD etc/001-gitserver.conf /etc/apache2/sites-enabled/001-gitserver.conf
-
+ADD etc/001-gitserver.conf /etc/apache2/sites-available/001-gitserver.conf
+RUN a2ensite 001-gitserver
+ 
 # setup repo git
 ADD git-repo /var/www/git
 RUN chmod +x /var/www/git/*.sh

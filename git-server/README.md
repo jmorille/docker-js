@@ -15,7 +15,14 @@ sudo docker run -i -t \
  -v /tmp/git-server/log:/var/log/apache2 \
  jmorille/git-server /bin/bash
 
+ # First commit
+git init
+touch README
+git add .
+git commit -m 'first commit'
 
+git remote add origin http://127.0.0.1:8585/repo.git
+git push origin master
 
 # Run Image
 sudo docker run -i -t \
