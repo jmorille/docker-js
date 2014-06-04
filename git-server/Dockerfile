@@ -53,7 +53,7 @@ RUN rm /etc/apache2/sites-enabled/*
 ADD etc/001-gitserver.conf /etc/apache2/sites-enabled/001-gitserver.conf
 
 # setup repo git
-ADD git-repo /var/www/git-repo
+ADD git-repo /var/www/git
 RUN chmod +x /var/www/*.sh
 
 # Expose
