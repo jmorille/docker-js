@@ -32,7 +32,8 @@ RUN apt-get -y install git
 # Install GitWeb
 # #######################
 RUN apt-get -y install gitweb
-RUN sed -i'' 's/$projectroot = *;/$projectroot = "/var/www/git";/' /etc/gitweb.conf 
+# echo -e '$projectroot = "/var/www/git";' > /etc/gitweb.conf 
+RUN sed -i'' 's/$projectroot = "/var/lib/git";/$projectroot = "/var/www/git";/' /etc/gitweb.conf 
 
 # Install Apache2 HTTPD
 # #######################
