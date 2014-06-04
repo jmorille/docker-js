@@ -46,7 +46,7 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2 
 ENV APACHE_LOCK_DIR /var/lock/apache2
  
-RUN mkdir -p $APACHE_LOCK_DIR
+RUN mkdir -p $APACHE_LOCK_DIR/..
 RUN a2enmod dav
 RUN a2enmod dav_fs
 
