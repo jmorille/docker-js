@@ -47,7 +47,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
  
 RUN mkdir -p $APACHE_LOCK_DIR/..
-RUN a2enmod a2enmod rewrite 
+RUN a2enmod rewrite 
 
 RUN rm /etc/apache2/sites-enabled/*
 ADD etc/001-gitserver.conf /etc/apache2/sites-enabled/001-gitserver.conf
