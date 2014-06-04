@@ -20,9 +20,13 @@ git init
 touch README
 git add .
 git commit -m 'first commit'
-
 git remote add origin http://127.0.0.1:8585/repo.git
 git push origin master
+
+--> 
+error: Cannot access URL http://192.168.59.103:8585/repo.git/, return code 22
+fatal: git-http-push failed
+
 
 # Run Image
 sudo docker run -i -t \

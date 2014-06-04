@@ -10,9 +10,9 @@ function createRepo {
   mkdir -p $PROJECT_DIR
   cd $PROJECT_DIR
   git --bare init
- # git update-server-info
- # mv hooks/post-update.sample hooks/post-update
- # chmod a+x hooks/post-update
+  git update-server-info
+  mv hooks/post-update.sample hooks/post-update
+  chmod a+x hooks/post-update
   chown -R www-data:www-data $GIT_REPO_DIR
 }
 
