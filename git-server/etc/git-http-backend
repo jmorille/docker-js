@@ -1,0 +1,6 @@
+#!/bin/bash
+PATH_INFO=$SCRIPT_URL
+GIT_PROJECT_ROOT=/var/www/git
+REMOTE_USER=$REDIRECT_REMOTE_USER
+export GIT_HTTP_EXPORT_ALL=true
+/usr/lib/git-core/git-http-backend
