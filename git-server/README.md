@@ -5,7 +5,7 @@ http://git-scm.com/book/fr/Git-sur-le-serveur-Installation-de-Git-sur-un-serveur
 
 
 # Build Image  
-sudo docker build -t jmorille/git-server .
+docker build -t jmorille/git-server .
  
 
 # View Image
