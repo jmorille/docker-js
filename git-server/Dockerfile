@@ -1,35 +1,12 @@
 #jmorille/git-server
-FROM ubuntu:14.04
- 
-# Set the env variable DEBIAN_FRONTEND to noninteractive
-ENV DEBIAN_FRONTEND noninteractive
-
-# Fix locales
-# RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
-
-# Config proxy env
-ENV http_proxy http://172.30.3.11:3128
-ENV https_proxy http://172.30.3.11:3128
-ENV no_proxy *.groupe.generali.fr
-
-ENV HTTP_PROXY http://172.30.3.11:3128
-ENV HTTPS_PROXY http://172.30.3.11:3128
-ENV NO_PROXY *.groupe.generali.fr
-
-# Enable universe
-# RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
- 
-# Update Ubuntu
-# #######################
-RUN apt-get update 
-RUN apt-get -y upgrade  
-RUN apt-get clean 
+FROM jmorille/ubuntu
 
 # Install Git
 # #######################
 RUN apt-get -y install git
 
-ENV REPOSITORY_GIT /var/www/git
+#ENV REPOSITORY_GIT /var/www/git
+ENV REPOSITORY_GIT /data/git-repo
 
 # Install GitWeb
 # #######################
@@ -67,13 +44,20 @@ RUN a2enmod env
 RUN rm /etc/apache2/sites-enabled/*
 ADD etc/001-gitserver.conf /etc/apache2/sites-available/001-gitserver.conf
 RUN a2ensite 001-gitserver
- 
-# setup repo git
-ADD git-repo /var/www/git
-RUN chmod +x /var/www/git/*.sh
 
-ADD git-repo/create-git-repo.sh /var/www/create-git-repo.sh
-RUN chmod +x /var/www/create-git-repo.sh
+
+ADD etc/start.sh /start.sh
+
+# setup repo git
+# ADD git-repo /var/www/git
+# RUN chmod +x /var/www/git/*.sh
+
+ADD git-repo/create-git-repo.sh /opt/create-git-repo.sh
+RUN chmod +x /opt/create-git-repo.sh
+
+RUN mkdir -p $REPOSITORY_GIT/..
+RUN cp /opt/create-git-repo.sh $REPOSITORY_GIT/..
+RUN echo "export REPOSITORY_GIT=$REPOSITORY_GIT" >> $APACHE_ENVVARS
 
 # TODO ENTRYPOINT ? chown -R www-data:www-data /var/www/git
 
@@ -85,7 +69,7 @@ RUN chown www-data:www-data /var/www/passwords
 
 # Expose
 # #######################
-VOLUME ["/var/www/git", "/var/log/apache2"]
+VOLUME ["/data/git-repo", "/var/log/apache2"]
 
 EXPOSE 80 443
 

@@ -11,7 +11,7 @@ sudo docker build -t jmorille/git-server .
 # View Image
 docker run -i -t \
  -p 8585:80 \
- -v /tmp/git-server/repo:/var/www/git \
+ -v /tmp/git-server/repo:/data/git-repo \
  -v /tmp/git-server/log:/var/log/apache2 \
  jmorille/git-server /bin/bash
 
@@ -31,7 +31,7 @@ fatal: git-http-push failed
 # Run Image
 docker run -i -t \
  -p 8585:80 \
- -v /tmp/git-server/repo:/var/www/git \
+ -v /tmp/git-server/repo:/data/git-repo \
  -v /tmp/git-server/log:/var/log/apache2 \
  -v /etc/localtime:/etc/localtime:ro \
  -v /etc/timezone:/etc/timezone:ro \

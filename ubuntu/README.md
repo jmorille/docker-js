@@ -2,7 +2,7 @@ jmorille/ubuntu
 =========
  
 # Build Image  
-sudo docker build -t jmorille/ubuntu .
+docker build -t jmorille/ubuntu .
  
 
 # View Image

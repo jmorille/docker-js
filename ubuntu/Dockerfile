@@ -9,12 +9,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Config proxy env
 ENV http_proxy http://172.30.3.11:3128
-ENV https_proxy http://172.30.3.11:3128
+ENV https_proxy $http_proxy
 ENV no_proxy *.groupe.generali.fr
 
-ENV HTTP_PROXY http://172.30.3.11:3128
-ENV HTTPS_PROXY http://172.30.3.11:3128
-ENV NO_PROXY *.groupe.generali.fr
+ENV HTTP_PROXY $http_proxy
+ENV HTTPS_PROXY $http_proxy
+ENV NO_PROXY $no_proxy
 
 # Enable universe
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
@@ -24,4 +24,5 @@ ENV NO_PROXY *.groupe.generali.fr
 RUN apt-get update 
 RUN apt-get -y upgrade  
 RUN apt-get clean 
- 
+
+CMD /bin/bash
