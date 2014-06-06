@@ -1,6 +1,12 @@
 #!/bin/bash
 
-GIT_REPO_DIR=/var/www/git
+if [-z $REPOSITORY_GIT]; then
+  GIT_REPO_DIR=/var/www/git
+  echo "Define GIT_REPO_DIR : $GIT_REPO_DIR"
+else
+  GIT_REPO_DIR=$REPOSITORY_GIT
+  echo "Use REPOSITORY_GIT : $GIT_REPO_DIR"
+fi
 
 PROJECT_NAME=$1
 PROJECT_DIR=$GIT_REPO_DIR/$PROJECT_NAME.git

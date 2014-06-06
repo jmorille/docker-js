@@ -29,6 +29,8 @@ RUN apt-get clean
 # #######################
 RUN apt-get -y install git
 
+ENV REPOSITORY_GIT /var/www/git
+
 # Install GitWeb
 # #######################
 RUN apt-get -y install gitweb
@@ -60,7 +62,6 @@ RUN a2enmod rewrite
 RUN a2enmod cgi
 RUN a2enmod alias
 RUN a2enmod env
-RUN a2enmod cgid
 
 
 RUN rm /etc/apache2/sites-enabled/*
@@ -74,10 +75,7 @@ RUN chmod +x /var/www/git/*.sh
 ADD git-repo/create-git-repo.sh /var/www/create-git-repo.sh
 RUN chmod +x /var/www/create-git-repo.sh
 
-ADD etc/git-http-backend /var/www/git-http-backend
-RUN chmod +x /var/www/git-http-backend
-RUN chown www-data:www-data /var/www/git-http-backend
-RUN chown -R www-data:www-data /var/www/git
+# TODO ENTRYPOINT ? chown -R www-data:www-data /var/www/git
 
 # Apache Password
 # #######################

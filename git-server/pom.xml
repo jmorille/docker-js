@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+<parent>
+  <groupId>com.jmorille.docker.js</groupId>
+  <artifactId>docker-js</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+</parent>
+
+  <artifactId>git-server</artifactId>
+  <packaging>pom</packaging>
+  <name>Docker Git Server</name>
+
+  <properties>
+     <docker-maven-plugin.version>1.0.0</docker-maven-plugin.version>
+     <docker-username>jmorille</docker-username>
+  </properties>
+ 
+
+ <build>
+        ...
+        <plugins> 
+            <plugin>
+                <groupId>com.alexecollins.docker</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                 <version>${docker-maven-plugin.version}</version>
+                <configuration>
+                    <!-- your installed version -->
+                    <version>1.9<version>
+                    <!-- used for push -->
+                    <username>${docker-username}</username>
+                    <email>alex.e.c@gmail.com</email>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
