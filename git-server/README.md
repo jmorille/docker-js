@@ -9,10 +9,10 @@ sudo docker build -t jmorille/git-server .
  
 
 # View Image
-sudo docker run -i -t \
+docker run -i -t \
  -p 8585:80 \
  -v /tmp/git-server/repo:/var/www/git \
- -v /tmp/git-server/log:/var/log/apache2 \ 
+ -v /tmp/git-server/log:/var/log/apache2 \
  jmorille/git-server /bin/bash
 
  # First commit
@@ -29,7 +29,7 @@ fatal: git-http-push failed
 
 
 # Run Image
-sudo docker run -i -t \
+docker run -i -t \
  -p 8585:80 \
  -v /tmp/git-server/repo:/var/www/git \
  -v /tmp/git-server/log:/var/log/apache2 \

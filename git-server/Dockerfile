@@ -8,13 +8,13 @@ ENV DEBIAN_FRONTEND noninteractive
 # RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
 
 # Config proxy env
-#ENV http_proxy http://172.30.3.11:3128
-#ENV https_proxy http://172.30.3.11:3128
-#ENV no_proxy *.groupe.generali.fr
+ENV http_proxy http://172.30.3.11:3128
+ENV https_proxy http://172.30.3.11:3128
+ENV no_proxy *.groupe.generali.fr
 
-#ENV HTTP_PROXY http://172.30.3.11:3128
-#ENV HTTPS_PROXY http://172.30.3.11:3128
-#ENV NO_PROXY *.groupe.generali.fr
+ENV HTTP_PROXY http://172.30.3.11:3128
+ENV HTTPS_PROXY http://172.30.3.11:3128
+ENV NO_PROXY *.groupe.generali.fr
 
 # Enable universe
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
@@ -75,6 +75,7 @@ RUN chmod +x /var/www/create-git-repo.sh
 ADD etc/git-http-backend /var/www/git-http-backend
 RUN chmod +x /var/www/git-http-backend
 RUN chown www-data:www-data /var/www/git-http-backend
+RUN chown -R www-data:www-data /var/www/git
 
 # Apache Password
 # #######################
