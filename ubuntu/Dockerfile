@@ -25,4 +25,6 @@ RUN apt-get update
 RUN apt-get -y upgrade  
 RUN apt-get clean 
 
+EXPOSE 22
+
 CMD /bin/bash

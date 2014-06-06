@@ -76,3 +76,4 @@ EXPOSE 80 443
 CMD ["apache2", "-D", "FOREGROUND"]
 
 #CMD /etc/init.d/apache2 start && /bin/bash
+# CMD (/usr/local/bin/run &) ; /usr/sbin/sshd -D
