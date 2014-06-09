@@ -1,0 +1,10 @@
+buildscript {
+    repositories {
+        maven { url 'http://jcenter.bintray.com' }
+    }
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-docker-plugin:0.1'
+    }
+}
+
+apply plugin: 'docker'

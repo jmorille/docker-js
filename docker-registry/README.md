@@ -1,43 +1,34 @@
 jmorille/docker-registry
 =========
 
-docker  run -p 5000 samalba/docker-registry
+https://github.com/dotcloud/docker-registry
 
-https://index.docker.io/u/samalba/docker-registry/
+# Bug 
+"storage_path" configuration is not reflected.
+https://github.com/dotcloud/docker-registry/issues/401
 
-
-
-# Build Image  
-sudo docker build -t jmorille/git-server .
- 
 
 # View Image
-docker run -i -t \
- -p 8585:80 \
- -v /tmp/git-server/repo:/var/www/git \
- -v /tmp/git-server/log:/var/log/apache2 \
- jmorille/docker-registry /bin/bash
+docker run -i -t  -p 5000:5000 \
+  -e DOCKER_REGISTRY_CONFIG=/registry-conf/config.yml \
+  -e SETTINGS_FLAVOR=local \
+  -e STORAGE_PATH=/tmp/registry \
+  -v /tmp/registry:/tmp \
+  -v /home/a000cqp/socle/docker-js/docker-registry/:/registry-conf \
+  registry
+  
 
- # First commit
-git init
-touch README
-git add .
-git commit -m 'first commit'
-git remote add origin http://127.0.0.1:8585/repo.git
-git push origin master
-
---> 
-error: Cannot access URL http://192.168.59.103:8585/repo.git/, return code 22
-fatal: git-http-push failed
-
-
+  # View Image
+docker run -i -t  -p 5000:5000 \
+    -v /home/a000cqp/socle/docker-js/docker-registry/:/registry-conf \
+    -e DOCKER_REGISTRY_CONFIG=/registry-conf/config.yml \
+    registry
+    
+    
 # Run Image
-docker run -i -t \
- -p 8585:80 \
- -v /tmp/git-server/repo:/var/www/git \
- -v /tmp/git-server/log:/var/log/apache2 \
- -v /etc/localtime:/etc/localtime:ro \
- -v /etc/timezone:/etc/timezone:ro \
- jmorille/docker-registry
+docker run -p 5000:5000 \
+  -v  /tmp/registry:/tmp/registry  \
+  -v /home/a000cqp/socle/docker-js/docker-registry/:/registry-conf \
+  -e DOCKER_REGISTRY_CONFIG=/registry-conf/config.yml \
+  registry
  
-
