@@ -5,13 +5,14 @@ FROM jmorille/ubuntu
 # #######################
 RUN apt-get -y install git
 
-#ENV REPOSITORY_GIT /var/www/git
 ENV REPOSITORY_GIT /data/git-repo
+ENV GITWEB_PROJECTROOT $REPOSITORY_GIT
 
 # Install GitWeb
 # #######################
 RUN apt-get -y install gitweb
-RUN sed -i'' 's/$projectroot = "\/var\/lib\/git";/$projectroot = "\/var\/www\/git";/' /etc/gitweb.conf 
+RUN sed -i 's/$projectroot = "\/var\/lib\/git";/$projectroot = "\/data\/git-repo";/' /etc/gitweb.conf
+RUN sed -i 's/^#\$/\$/' /etc/gitweb.conf
 
 
 # Install Apache2 HTTPD
@@ -21,7 +22,6 @@ RUN apt-get -y install apache2 apache2-utils
 
 # Config Apache 2
 # #######################
-
 # let's copy a few of the settings from /etc/init.d/apache2
 ENV APACHE_CONFDIR /etc/apache2
 ENV APACHE_ENVVARS $APACHE_CONFDIR/envvars
@@ -40,24 +40,28 @@ RUN a2enmod cgi
 RUN a2enmod alias
 RUN a2enmod env
 
-
+# Git Host Apache
+# #######################
 RUN rm /etc/apache2/sites-enabled/*
 ADD etc/001-gitserver.conf /etc/apache2/sites-available/001-gitserver.conf
 RUN a2ensite 001-gitserver
 
+# Add Variable Apache
+# #######################
+RUN echo "export REPOSITORY_GIT=$REPOSITORY_GIT" >> $APACHE_ENVVARS
+RUN echo "export GITWEB_PROJECTROOT=$REPOSITORY_GIT" >> $APACHE_ENVVARS
 
+# Script Start
+# #######################
 ADD etc/start.sh /start.sh
-
-# setup repo git
-# ADD git-repo /var/www/git
-# RUN chmod +x /var/www/git/*.sh
+RUN chmod +x /start.sh
 
 ADD git-repo/create-git-repo.sh /opt/create-git-repo.sh
 RUN chmod +x /opt/create-git-repo.sh
 
 RUN mkdir -p $REPOSITORY_GIT/..
 RUN cp /opt/create-git-repo.sh $REPOSITORY_GIT/..
-RUN echo "export REPOSITORY_GIT=$REPOSITORY_GIT" >> $APACHE_ENVVARS
+
 
 # TODO ENTRYPOINT ? chown -R www-data:www-data /var/www/git
 

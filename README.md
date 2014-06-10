@@ -1,7 +1,7 @@
 docker-js
 =========
 
-
+ sudo usermod -a -G docker a000cqp
 
 # Config global
 /etc/default/docker
