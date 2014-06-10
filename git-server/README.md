@@ -20,7 +20,7 @@ git init
 touch README
 git add .
 git commit -m 'first commit'
-git remote add origin http://127.0.0.1:8585/repo.git
+git remote add origin http://127.0.0.1:8585/git/repo.git
 git push origin master
 
 

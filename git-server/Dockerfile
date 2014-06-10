@@ -6,8 +6,6 @@ FROM jmorille/ubuntu
 RUN apt-get -y install git
 
 ENV REPOSITORY_GIT /data/git-repo
-ENV GITWEB_PROJECTROOT $REPOSITORY_GIT
-
 # Install GitWeb
 # #######################
 RUN apt-get -y install gitweb
@@ -53,8 +51,8 @@ RUN echo "export GITWEB_PROJECTROOT=$REPOSITORY_GIT" >> $APACHE_ENVVARS
 
 # Script Start
 # #######################
-ADD etc/start.sh /start.sh
-RUN chmod +x /start.sh
+ADD etc/run.sh /run.sh
+RUN chmod +x /run.sh
 
 ADD git-repo/create-git-repo.sh /opt/create-git-repo.sh
 RUN chmod +x /opt/create-git-repo.sh
@@ -68,8 +66,8 @@ RUN cp /opt/create-git-repo.sh $REPOSITORY_GIT/..
 # Apache Password
 # #######################
 
-RUN htpasswd -c -b -m /var/www/passwords jon jon
-RUN chown www-data:www-data /var/www/passwords
+RUN htpasswd -c -b -m /var/www/git-passwords jon jon
+RUN chown www-data:www-data /var/www/git-passwords
 
 # Expose
 # #######################
