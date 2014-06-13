@@ -1,6 +1,8 @@
 jmorille/chef-server
 ======== 
 
+https://github.com/tmc/dockerfiles/tree/master/chef-server
+docker run -d -p 443:443 base/chef-server
 
 
 # Build Image  

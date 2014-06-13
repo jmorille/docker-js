@@ -34,3 +34,10 @@ docker run -i -t \
  jmorille/git-server
  
 
+
+# Push Image
+docker tag jmorille/git-server 127.0.0.1:5000/git-server:0.0.1
+docker push 127.0.0.1:5000/git-server
+
+
+docker pull 127.0.0.1:5000/git-server

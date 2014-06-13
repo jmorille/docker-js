@@ -63,11 +63,24 @@ RUN cp /opt/create-git-repo.sh $REPOSITORY_GIT/..
 
 # TODO ENTRYPOINT ? chown -R www-data:www-data /var/www/git
 
+
+# Apache TLS Certificat
+# #######################
+RUN a2enmod ssl
+# RUN make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/ssl/private/localhost.pem
+
 # Apache Password
 # #######################
 
 RUN htpasswd -c -b -m /var/www/git-passwords jon jon
 RUN chown www-data:www-data /var/www/git-passwords
+
+
+# LDAP Password
+# #######################
+#RUN a2enmod authnz_ldap
+#RUN a2enmod ldap
+
 
 # Expose
 # #######################

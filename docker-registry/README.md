@@ -8,24 +8,24 @@ https://github.com/dotcloud/docker-registry
 https://github.com/dotcloud/docker-registry/issues/401
 
 
-# View Image
-docker run -i -t  -p 5000:5000 \
-  -e DOCKER_REGISTRY_CONFIG=/registry-conf/config.yml \
-  -e SETTINGS_FLAVOR=local \
-  -e STORAGE_PATH=/tmp/registry \
-  -v /tmp/registry:/tmp \
-  -v /home/a000cqp/socle/docker-js/docker-registry/:/registry-conf \
-  registry
-  
+# REST API
+Monitoring : http://127.0.0.1:5000/v1/_ping
+List images : http://127.0.0.1:5000/v1/search
 
-  # View Image
-docker run -i -t  -p 5000:5000 \
-    -v /home/a000cqp/socle/docker-js/docker-registry/:/registry-conf \
-    -e DOCKER_REGISTRY_CONFIG=/registry-conf/config.yml \
-    registry
-    
-    
+Pour voir une images : http://127.0.0.1:5000/v1/repositories/library/git-server/tags
+
+
+# Build Image
+docker build -t generali_ccj/docker-registry .
+
 # Run Image
+docker run -d -p 5000:5000 \
+  -v  /tmp/registry:/tmp/registry  \
+  generali_ccj/docker-registry
+    
+    
+    
+# Run Direct Origin Image
 docker run -p 5000:5000 \
   -v  /tmp/registry:/tmp/registry  \
   -v /home/a000cqp/socle/docker-js/docker-registry/:/registry-conf \

@@ -17,15 +17,27 @@ function buildDockerImages {
     done
 }
 
+function buildDockerRegistryImages {
+    for v
+    in  dockerRegistry
+    do
+      echo ""
+      echo "### #################################################### ###"
+      echo "### Building docker images : $v"
+      echo "### #################################################### ###"
+      docker build -t $PROJECT_NAMESPACE/$v $v/.
+      echo ""
+    done
+}
 
 function tagDockerImages {
     for v
     in  git-server bower-private bower-public npmregistry-public
     do
       echo ""
-      echo "### ####################################"
+      echo "### #################################################### ###"
       echo "### Tag docker images : $v to Version $PROJECT_VERSION"
-      echo "### ####################################"
+      echo "### #################################################### ###"
       docker tag $PROJECT_NAMESPACE/$v $DOCKER_REGISTRY_URL/$v:$PROJECT_VERSION
       docker push  $DOCKER_REGISTRY_URL/$v
       echo ""
@@ -33,8 +45,9 @@ function tagDockerImages {
 }
 
 function buildAndTagDockerImages {
+  buildDockerRegistryImages
   buildDockerImages
-  tagDockerImages
+  # tagDockerImages
 }
 
 

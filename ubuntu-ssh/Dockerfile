@@ -1,6 +1,5 @@
 #jmorille/ubuntu-ssh
 FROM jmorille/ubuntu
- 
 
 
 # install SSH server so we can connect multiple times to the container

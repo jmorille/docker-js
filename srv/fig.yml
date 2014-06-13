@@ -1,0 +1,30 @@
+git:
+  image: gf219896.groupe.generali.fr:5000/git-server:0.0.1
+  volumes:
+    - data/git-repo:/data/git-repo
+    - log/git-server:/var/log/apache2
+    - /etc/localtime:/etc/localtime
+    - /etc/timezone:/etc/timezone
+  ports:
+    - "8181:80"
+
+bowerpublic:
+  image: gf219896.groupe.generali.fr:5000/bower-public:0.0.1
+  volumes:
+    - data/git-repo:/data/git-repo
+    - log/git-server:/var/log/apache2
+    - /etc/localtime:/etc/localtime
+    - /etc/timezone:/etc/timezone
+  ports:
+    - "1234:80"
+
+bowerprivate:
+  image: gf219896.groupe.generali.fr:5000/bower-private:0.0.1
+  volumes:
+    - data/bower-private:/usr/local/var/lib/couchdb
+    - log/bower-private:/usr/local/var/log/couchdb
+    - /etc/localtime:/etc/localtime
+    - /etc/timezone:/etc/timezone
+  ports:
+    - "3333:3333"
+
