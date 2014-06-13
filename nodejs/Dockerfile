@@ -20,8 +20,8 @@ RUN apt-get  install -y  git
 
 # Config Git
 RUN git --version
-RUN git config --global http.proxy $HTTP_PROXY
-RUN git config --global https.proxy $HTTP_PROXY
+#RUN git config --global http.proxy $HTTP_PROXY
+#RUN git config --global https.proxy $HTTPS_PROXY
 RUN git config --global -l
 
 # Install Node JS
@@ -49,10 +49,10 @@ RUN echo $PATH
 # Config Npm
 # RUN npm config set registry "http://registry.npmjs.org/"
 
-RUN npm config set proxy http://172.30.3.11:3128
-RUN npm config set https-proxy http://172.30.3.11:3128
-RUN npm config set strict-ssl false
-RUN npm config list
+#RUN npm config set proxy $HTTP_PROXY
+#RUN npm config set https-proxy $HTTPS_PROXY
+#RUN npm config set strict-ssl false
+#RUN npm config list
 
 RUN node --version
 RUN npm --version
