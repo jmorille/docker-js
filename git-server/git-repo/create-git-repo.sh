@@ -1,41 +1,40 @@
 #!/bin/bash
 
-DOCKER_REGISTRY_URL=127.0.0.1:5000
-PROJECT_NAMESPACE=jmorille
-PROJECT_VERSION=0.0.1
+if [-z $REPOSITORY_GIT]; then
+  GIT_REPO_DIR=/data/git-repo
+  echo "Define GIT_REPO_DIR : $GIT_REPO_DIR"
+else
+  GIT_REPO_DIR=$REPOSITORY_GIT
+  echo "Use REPOSITORY_GIT : $GIT_REPO_DIR"
+fi
+ 
 
-function buildDockerImages {
-    for v
-    in  ubuntu ubuntu-ssh git-server nodejs couchdb bower-private bower-public npmregistry-public
-    do
-      echo ""
-      echo "### ####################################"
-      echo "### Building docker images : $v"
-      echo "### ####################################"
-      docker build -t $PROJECT_NAMESPACE/$v $v/.
-      echo ""
-    done
+PROJECT_NAME=$1
+PROJECT_DIR=$GIT_REPO_DIR/$PROJECT_NAME.git
+
+
+function createRepo {
+  mkdir -p $PROJECT_DIR
+  cd $PROJECT_DIR
+  git --bare init
+  git update-server-info
+  mv hooks/post-update.sample hooks/post-update
+  chmod a+x hooks/post-update
+  chown -R www-data:www-data $GIT_REPO_DIR
+}
+
+function setup {
+  if [ -d $PROJECT_DIR ]; then
+     echo "Directory already exist : $PROJECT_DIR"
+  else
+    if [ -z $PROJECT_NAME ]; then
+       echo "No Project name in parameter"
+    else
+       createRepo
+    fi
+  fi
 }
 
 
-function tagDockerImages {
-    for v
-    in  git-server bower-private bower-public npmregistry-public
-    do
-      echo ""
-      echo "### ####################################"
-      echo "### Tag docker images : $v to Version $PROJECT_VERSION"
-      echo "### ####################################"
-      docker tag $PROJECT_NAMESPACE/$v $DOCKER_REGISTRY_URL/$v:$PROJECT_VERSION
-      docker push  $DOCKER_REGISTRY_URL/$v
-      echo ""
-    done
-}
+setup < /dev/tty
 
-function buildAndTagDockerImages {
-  buildDockerImages
-  tagDockerImages
-}
-
-
-buildAndTagDockerImages < /dev/tty
