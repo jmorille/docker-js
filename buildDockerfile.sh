@@ -12,7 +12,7 @@ function buildDockerImages {
       echo "### ####################################"
       echo "### Building docker images : $v"
       echo "### ####################################"
-      docker build -t $PROJECT_NAMESPACE/$v $v/.
+      docker build -t $PROJECT_NAMESPACE/$v $v/. || exit 1
       echo ""
     done
 }
@@ -25,7 +25,7 @@ function buildDockerRegistryImages {
       echo "### #################################################### ###"
       echo "### Building docker images : $v"
       echo "### #################################################### ###"
-      docker build -t $PROJECT_NAMESPACE/$v $v/.
+      docker build -t $PROJECT_NAMESPACE/$v $v/. || exit 1
       echo ""
     done
 }
@@ -38,16 +38,16 @@ function tagDockerImages {
       echo "### #################################################### ###"
       echo "### Tag docker images : $v to Version $PROJECT_VERSION"
       echo "### #################################################### ###"
-      docker tag $PROJECT_NAMESPACE/$v $DOCKER_REGISTRY_URL/$v:$PROJECT_VERSION
-      docker push  $DOCKER_REGISTRY_URL/$v
+      docker tag $PROJECT_NAMESPACE/$v $DOCKER_REGISTRY_URL/$v:$PROJECT_VERSION || exit 1
+      docker push  $DOCKER_REGISTRY_URL/$v || exit 1
       echo ""
     done
 }
 
 function buildAndTagDockerImages {
-  buildDockerRegistryImages
-  buildDockerImages
-  # tagDockerImages
+  buildDockerRegistryImages || exit 1
+  buildDockerImages || exit 1
+  # tagDockerImages || exit 1
 }
 
 
