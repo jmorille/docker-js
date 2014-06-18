@@ -1,6 +1,12 @@
 #jmorille/ubuntu
 FROM ubuntu:14.04
- 
+
+# Base Image recommandation : https://github.com/phusion/baseimage-docker
+# ##############################################
+# Set correct environment variables.
+ENV HOME /root
+
+
 # Set the env variable DEBIAN_FRONTEND to noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,9 +24,16 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Enable universe
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
- 
+
+
+# Container cannot connect to Upstart
+# https://github.com/dotcloud/docker/issues/1024
+# ##############################################
+# RUN dpkg-divert --local --rename --add /sbin/initctl
+# RUN ln -s /bin/true /sbin/initctl
+
 # Update Ubuntu
-# #######################
+# ##############################################
 RUN apt-get update 
 RUN apt-get -y upgrade  
 RUN apt-get -y autoremove

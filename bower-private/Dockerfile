@@ -29,9 +29,9 @@ VOLUME ["/usr/local/var/lib/couchdb", "/usr/local/var/log/couchdb"]
 
 EXPOSE 3333
 
-CMD  /usr/local/bin/couchdb start -b && \
-     sleep 5 && \
-     node  /opt/bower-registry/bin/bower-registry
+
+CMD  /run.sh admin admin
+
 
 
 
