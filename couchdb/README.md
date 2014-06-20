@@ -1,9 +1,9 @@
 # Build Image  
-sudo docker build -t jmorille/couchdb .
+docker build -t jmorille/couchdb .
  
 
 # View Image
-sudo docker run -i -t   jmorille/couchdb /bin/bash
+docker run -i -t   jmorille/couchdb /bin/bash
 
 
 # Run Image

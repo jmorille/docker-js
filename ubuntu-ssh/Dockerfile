@@ -20,7 +20,6 @@ RUN echo 'admin:admin' |chpasswd
 
 EXPOSE 8080
 EXPOSE 22
-  
 
 
 CMD /usr/sbin/sshd -D

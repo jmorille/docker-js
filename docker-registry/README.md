@@ -16,7 +16,7 @@ Pour voir une images : http://127.0.0.1:5000/v1/repositories/library/git-server/
 
 
 # Build Image
-docker build -t generali_ccj/docker-registry .
+docker build -t jmorille/docker-registry .
 
 # Run Image
 docker run -d -p 5000:5000 \

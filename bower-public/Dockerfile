@@ -16,9 +16,8 @@ ADD etc/001-bower.conf /etc/httpd/conf.d/
 # VOLUME [ "/var/log/httpd"]
 
 # Expose ports.
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
 
 
 # Define default command.
-CMD ["httpd", "-cErrorLog /dev/stderr", "-DFOREGROUND"]
+CMD exec httpd -cErrorLog /dev/stderr -DFOREGROUND
