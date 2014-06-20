@@ -20,7 +20,8 @@ docker build -t jmorille/docker-registry .
 
 # Run Image
 docker run -d -p 5000:5000 \
-  -v  /tmp/registry:/tmp/registry  \
+  -v  /tmp/registry:/data/docker-registry  \
+  -v  /tmp/registry.db:/data/docker-registry.db  \  
   generali_ccj/docker-registry
     
     

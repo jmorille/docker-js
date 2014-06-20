@@ -19,7 +19,7 @@ function buildDockerImages {
 
 function buildDockerRegistryImages {
     for v
-    in  dockerRegistry
+    in  docker-registry
     do
       echo ""
       echo "### #################################################### ###"

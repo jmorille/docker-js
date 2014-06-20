@@ -1,5 +1,5 @@
 #jmorille/docker-registry
-FROM registry
+FROM registry:0.7.2
 
 ENV SETTINGS_FLAVOR local
 ENV DOCKER_REGISTRY_CONFIG /registry-conf/config.yml
