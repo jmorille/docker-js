@@ -20,7 +20,7 @@ RUN apt-get install -y git-core
  
 # Ruby
 # #######################
- 
+RUN  apt-get install -y ruby 
 
 # Database
 # #######################
