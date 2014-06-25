@@ -51,7 +51,7 @@ function setup {
 
   # Clean Images
   # #######################
-  # cleanBuildInstall || exit 1
+  cleanBuildInstall || exit 1
 }
 
 

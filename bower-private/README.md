@@ -38,3 +38,12 @@ docker tag jmorille/bower-private gf219896.groupe.generali.fr:5000/bower-private
 docker push gf219896.groupe.generali.fr:5000/bower-private
  
 docker pull gf219896.groupe.generali.fr:5000/bower-private
+
+
+docker run -i -t -p 3334:3333 \
+ -v /couchdb/bower/data:/usr/local/var/lib/couchdb \
+ -v /couchdb/bower/log:/usr/local/var/log/couchdb \
+ jmorille/bower-private /bin/bash
+ 
+ 
+ 

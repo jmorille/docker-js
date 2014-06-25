@@ -2,7 +2,6 @@
 
 
 function installBower {
-
    npm config list
    git config --global -l
 
@@ -10,17 +9,18 @@ function installBower {
    # #######################
    # Necessaire pour recompiler bcrypt
    apt-get install -y gcc gcc-c++
+   apt-get install -y python
 
    # Install Bower Registry
    # #######################
 
    git clone https://github.com/bower/registry.git  -b node_rewrite /opt/bower-registry
-   cd /opt/bower-registry && \
+   cd /opt/bower-registry
    npm install
 
    # Config Bower Registry
    # #######################
-   # sed -i'' "s/'database': 'bower'/'database': 'bower-generali'/"  /opt/bower-registry/lib/helpers/config.js
+   # sed -i'' "s/'database': 'bower'/'database': 'bower-private'/"  /opt/bower-registry/lib/helpers/config.js
 
 }
 
@@ -40,12 +40,12 @@ function setup {
 
   # Install
   # #######################
-  #installBower || exit 1
+  installBower || exit 1
 
 
   # Clean Images
   # #######################
-  # cleanBuildInstall || exit 1
+  cleanBuildInstall || exit 1
 }
 
 

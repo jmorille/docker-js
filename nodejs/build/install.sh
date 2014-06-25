@@ -22,6 +22,7 @@ function installGit {
 
 
 function installNodeJs {
+  apt-get install -y curl
    # Version Download
    # ################
    mkdir -p $NODE_HOME
@@ -58,7 +59,6 @@ function setup {
   # Script Start
   # #######################
   apt-get update
-  apt-get install -y curl
   chmod +x /build/*.sh
 
   # Install Git

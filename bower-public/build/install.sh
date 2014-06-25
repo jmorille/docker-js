@@ -3,10 +3,18 @@
 
 function installBower {
   apt-get install -y apache2
-
+  # Create mandatory Folder
+  mkdir -p $APACHE_LOCK_DIR
+  chown www-data:www-data $APACHE_LOCK_DIR
+  # Remove All Site
+  rm /etc/apache2/sites-enabled/*
+  # Enable Module
+  a2enmod proxy
+  a2enmod proxy_http
   # Config Apache 2
   # #######################
-  mv 001-bower.conf /etc/httpd/conf.d/
+  mv /build/001-bower.conf /etc/apache2/sites-available/001-bower.conf
+  a2ensite 001-bower
 }
 
 
@@ -25,12 +33,12 @@ function setup {
 
   # Install
   # #######################
-  #installBower || exit 1
+  installBower || exit 1
 
 
   # Clean Images
   # #######################
-  # cleanBuildInstall || exit 1
+  cleanBuildInstall || exit 1
 }
 
 
